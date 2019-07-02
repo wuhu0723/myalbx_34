@@ -5,7 +5,8 @@ var connection = mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'root',
-    database:'baixiu'
+    database:'baixiu',
+    dateStrings:true
 })
 // 3.打开连接--不用写，它会默认找到最近所创建的连接来使用
 
