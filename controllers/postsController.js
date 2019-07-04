@@ -4,6 +4,7 @@ var moment = require('moment')
 exports.getPostList = (req,res) => {
     // 获取参数:这种获取参数的方式是因为已经添加了body-parser的配置
     var obj = req.query
+    console.log(obj)
     // 获取所有文章列表并返回
     // 数据获取调用数据模块进行处理
     postsModule.getPostList(obj,(err,data) => {

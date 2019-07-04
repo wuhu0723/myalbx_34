@@ -2,18 +2,35 @@ $(function(){
     // 当前页码
     var pagenum = 1
     // 每页显示的记录数
-    var pagesize = 4
+    var pagesize = 2
+    // 定义筛选条件
+    // var query= {}
 
     // 发起ajax请求，请求所有文章数据
-    init();
+    init({});
+
+    // 实现用户数据的筛选
+    $('.btn-search').on('click',function(e){
+        e.preventDefault()
+        // 重点是获取用户数据，你也可以使用全局变量
+        var query = {}
+        // 判断用户有没有选择指定的筛选条件
+        if($('.cateSelector').val() != 'all'){
+            query.cate = $('.cateSelector').val()
+        }
+        if($('.statuSelector').val() != 'all'){
+            query.statu = $('.statuSelector').val()
+        }
+        // 发起请求
+        init(query)
+    });
 
     // 使用一个自调用函数来实现分类数据的加载
     (function(){
         $.ajax({
             url:'/getAllCateList',
-            method:'get',
+            type:'get',
             success:function(res){
-                console.log(res)
                 // 生成分类数据的动态结构
                 var html = '<option value="all">所有分类</option>'
                 for(var i=0;i<res.data.length;i++){
@@ -25,13 +42,19 @@ $(function(){
     })()
 
     // 数据初始化
-    function init(){
+    function init(query){
+        console.log(query)
         $.ajax({
             type:'get',
             url:'/getPostList',
+            // pagenum=pagenum&pagesize=pagesize&query=[object,Object]
             data:{
                 pagenum:pagenum,
-                pagesize:pagesize
+                pagesize:pagesize,
+                // cate:query.cate, //undefined
+                // statu:query.statu
+                // 展开运算符：可以将一个对象的具体的属性进行展开，展开为一组一组的键值对
+                ...query
             },
             dataType:'json',
             success:function(res){
