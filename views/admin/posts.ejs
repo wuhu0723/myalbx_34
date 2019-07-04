@@ -26,12 +26,7 @@
           </select>
           <button class="btn btn-default btn-sm">筛选</button>
         </form>
-        <ul class="pagination pagination-sm pull-right">
-          <li><a href="#">上一页</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">下一页</a></li>
+        <ul class="pagination pagination-sm pull-right" style='float:right'>
         </ul>
       </div>
       <table class="table table-striped table-bordered table-hover">
@@ -57,7 +52,7 @@
   <%- include('./layout/admin_footer.ejs');%>
   <!-- 添加模板结构 -->
   <script type='text/template' id='postListTemp'>
-    {{each data as value index}}
+    {{each result as value index}}
       <tr>
         <td class="text-center"><input type="checkbox"></td>
         <td>{{value.title}}</td>
@@ -79,4 +74,5 @@
     {{/each}}
   </script>
   <script src="/assets/vendors/template/template.js"></script>
+  <script src="/assets/vendors/bootstrappaginator/bootstrap-paginator.min.js"></script>
   <script src="/assets/js/posts.js"></script>

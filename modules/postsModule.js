@@ -1,3 +1,6 @@
+// 处理posts表的所有数据操作
+
+
 // 1,引入mysql
 var mysql = require('mysql')
 // 2.创建连接
@@ -29,7 +32,16 @@ exports.getPostList = (params,callback) => {
         if(err){
             callback(err)
         }else{
-            callback(null,results)
+            // 这条语句 可以获取posts表中的总记录数
+            sql = 'select count(*) cnt from posts'
+            connection.query(sql,(err1,data1)=>{
+                if(err1){
+                    callback(err1)
+                }else{
+                    // 我们又需要返回查询出的数据，又需要返回查询出总记录数
+                    callback(null,{result:results,total:data1[0].cnt})
+                }
+            })
         }
     })
 }
