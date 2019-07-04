@@ -1,6 +1,7 @@
 // 引入users表的控制器模块
 const pagesController = require('../controllers/pagesController.js')
 const postsController = require('../controllers/postsController.js')
+const cateController = require('../controllers/cateController.js')
 // 封装路由模块
 const express = require('express')
 // Router()构造函数创建的路由对象可以当成一个中间件来使用
@@ -37,6 +38,11 @@ router.get('/',pagesController.getIndexPage)
       // 业务处理
       // 1.获取所有文章数据
       .get('/getPostList',postsController.getPostList)
+
+
+
+      // 2.获取所有分类数据
+      .get('/getAllCateList',cateController.getAllCateList)
 
 
 

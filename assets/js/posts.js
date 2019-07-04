@@ -2,11 +2,29 @@ $(function(){
     // 当前页码
     var pagenum = 1
     // 每页显示的记录数
-    var pagesize = 1
+    var pagesize = 4
 
     // 发起ajax请求，请求所有文章数据
-    init()
+    init();
 
+    // 使用一个自调用函数来实现分类数据的加载
+    (function(){
+        $.ajax({
+            url:'/getAllCateList',
+            method:'get',
+            success:function(res){
+                console.log(res)
+                // 生成分类数据的动态结构
+                var html = '<option value="all">所有分类</option>'
+                for(var i=0;i<res.data.length;i++){
+                    html += `<option value="${res.data[i].id}">${res.data[i].name}</option>`
+                }
+                $('.cateSelector').html(html)
+            }
+        })
+    })()
+
+    // 数据初始化
     function init(){
         $.ajax({
             type:'get',
