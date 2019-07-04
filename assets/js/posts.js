@@ -25,6 +25,8 @@ $(function(){
         init(query)
     });
 
+    
+
     // 使用一个自调用函数来实现分类数据的加载
     (function(){
         $.ajax({
@@ -43,7 +45,7 @@ $(function(){
 
     // 数据初始化
     function init(query){
-        console.log(query)
+        console.log(123)
         $.ajax({
             type:'get',
             url:'/getPostList',
@@ -87,4 +89,25 @@ $(function(){
             }
         })
     }
+
+    // 使用事件委托的方式来实现文章数据的删除
+    $('tbody').on('click','.btndel',function(){
+        // 获取id
+        var id = $(this).data('id')
+        $.ajax({
+            type:'get',
+            url:'/delPostById',
+            data:{id:id},
+            success:(res) => {
+                console.log(res)
+            }
+        })
+    })
 })
+
+
+// // 根据id删除文章数据
+// function delpost(id){
+    
+//     this.init()
+// };

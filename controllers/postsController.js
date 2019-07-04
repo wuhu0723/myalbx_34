@@ -1,6 +1,6 @@
 var postsModule = require('../modules/postsModule.js')
 var moment = require('moment')
-
+// 获取所有文章列表数据
 exports.getPostList = (req,res) => {
     // 获取参数:这种获取参数的方式是因为已经添加了body-parser的配置
     var obj = req.query
@@ -9,7 +9,6 @@ exports.getPostList = (req,res) => {
     // 数据获取调用数据模块进行处理
     postsModule.getPostList(obj,(err,data) => {
         if(err){
-            console.log(err)
             res.json({
                 code:400,
                 msg:'数据查询失败'
@@ -25,6 +24,24 @@ exports.getPostList = (req,res) => {
                 code:200,
                 msg:'数据查询成功',
                 data:data
+            })
+        }
+    })
+}
+// 根据文章id删除文章数据
+exports.delPostById = (req,res) => {
+    var id = req.query.id
+    // 调用数据模块中的方法
+    postsModule.delPostById(id,(err) => {
+        if(err){
+            res.json({
+                code:400,
+                msg:'数据删除失败'
+            })
+        }else{
+            res.json({
+                code:200,
+                msg:'数据删成功'
             })
         }
     })

@@ -38,6 +38,7 @@ router.get('/',pagesController.getIndexPage)
       // 业务处理
       // 1.获取所有文章数据
       .get('/getPostList',postsController.getPostList)
+      .get('/delPostById',postsController.delPostById)
 
 
 

@@ -27,7 +27,7 @@ var connection = mysql.createConnection({
 exports.getPostList = (params,callback) => {
     // 1.创建sql语句
     // select from [inner join .... on] where  [order by]  limit
-    var sql = `select posts.id,posts.slug,posts.title,posts.feature,posts.created,posts.content,posts.status,users.id,users.nickname,categories.name
+    var sql = `select posts.id pid,posts.slug,posts.title,posts.feature,posts.created,posts.content,posts.status,users.id uid,users.nickname,categories.name
                 from posts
                 inner join users on posts.user_id = users.id
                 inner join categories on posts.category_id = categories.id
@@ -50,6 +50,7 @@ exports.getPostList = (params,callback) => {
         if(err){
             callback(err)
         }else{
+            console.log(results)
             // 这条语句 可以获取posts表中的总记录数
             sql = 'select count(*) cnt from posts'
             connection.query(sql,(err1,data1)=>{
@@ -60,6 +61,18 @@ exports.getPostList = (params,callback) => {
                     callback(null,{result:results,total:data1[0].cnt})
                 }
             })
+        }
+    })
+}
+
+// 根据文章id删除文章数据
+exports.delPostById = (id,callback) => {
+    var sql = 'delete from posts where id = ' + id
+    connection.query(sql,(err,results) => {
+        if(err){
+            callback(err)
+        }else{
+            callback(null)
         }
     })
 }
