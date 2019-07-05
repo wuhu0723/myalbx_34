@@ -46,3 +46,14 @@ exports.delPostById = (req,res) => {
         }
     })
 }
+
+// 实现文章的新增
+exports.addPost = (req,res) => {
+    // 接收参数
+    var obj = req.body
+    obj.views = 0
+    obj.likes = 0
+    obj.user_id = '?'
+    console.log(obj)
+    // 调用数据模块 的新增文章的方法进行文章的新增
+}

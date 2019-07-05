@@ -28,6 +28,15 @@ $(function () {
         // instances:可以获取到当前CKEDITOR的所的实例，通过replace方法就可以创建实例
         // getData是可以获取到数据，但是对于我们而言，需要额外的进行参数的拼接 --不方便
         // console.log(CKEDITOR.instances.content.getData())
+        $.ajax({
+            type:'post',
+            url:'/addPost',
+            data:$('.row').serialize(),
+            dataType:'json',
+            success:function(res){
+                console.log(res)
+            }
+        })
     })
 
 
@@ -52,6 +61,9 @@ $(function () {
             success:function(res){
                 // 判断
                 if(res.code == 200){
+                    // 将文件名称存储到指定的隐藏域中
+                    $('[name=feature]').val(res.img)
+                    // $('#userimg').val(res.img)
                     // 实现预览
                     $('.thumbnail').attr('src','/uploads/' + res.img).show()
                 }else{
