@@ -2,6 +2,7 @@
 const pagesController = require('../controllers/pagesController.js')
 const postsController = require('../controllers/postsController.js')
 const cateController = require('../controllers/cateController.js')
+const uploadController = require('../controllers/uploadController')
 // 封装路由模块
 const express = require('express')
 // Router()构造函数创建的路由对象可以当成一个中间件来使用
@@ -44,6 +45,10 @@ router.get('/',pagesController.getIndexPage)
 
       // 2.获取所有分类数据
       .get('/getAllCateList',cateController.getAllCateList)
+
+
+      // 文件上传
+      .post('/uploadFile',uploadController.uploadFile)
 
 
 
