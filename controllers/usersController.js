@@ -2,6 +2,7 @@
 var userModule = require('../modules/userModule')
 exports.login = (req,res) => {
     var obj = req.body
+    console.log(obj)
     // 登陆验证应该由数据库中的数据来决定
     userModule.login(obj.email,(err,data) =>{
         if(err){
