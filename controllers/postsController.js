@@ -53,7 +53,9 @@ exports.addPost = (req,res) => {
     var obj = req.body
     obj.views = 0
     obj.likes = 0
-    obj.user_id = '?'
-    console.log(obj)
+    obj.user_id = req.session.currentUser.id
+    console.log('00000000000000000000000')
+    console.log(req.session.currentUser)
+    console.log('00000000000000000000000')
     // 调用数据模块 的新增文章的方法进行文章的新增
 }

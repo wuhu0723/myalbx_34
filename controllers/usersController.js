@@ -16,9 +16,13 @@ exports.login = (req,res) => {
                 console.log('------------------')
                 if(data.password == obj.password){
                     // 将登陆成功的状态写入到cookie
-                    res.writeHead(200,{
-                        'Set-Cookie':'islogin=true'
-                    })
+                    // res.writeHead(200,{
+                    //     'Set-Cookie':'islogin=true'
+                    // })
+                    // 以session方式来实现状态保存：这里写入session数据
+                    req.session.isLogin = 'true'
+                    // 将当前用户对象存储到session
+                    req.session.currentUser = data
                     // 将当前成功登陆的用户信息进行存储，以便我后期需要的时候进行获取
                     res.end(JSON.stringify({
                         code:200,
