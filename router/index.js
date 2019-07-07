@@ -53,7 +53,7 @@ router.get('/',pagesController.getIndexPage)
       .post('/uploadFile',uploadController.uploadFile)
 
 
-      // 用户登陆
+      // 用户登陆验证
       .post('/login',usersController.login)
 
 
