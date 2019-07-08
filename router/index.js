@@ -42,6 +42,7 @@ router.get('/',pagesController.getIndexPage)
       .get('/getPostList',postsController.getPostList)
       .get('/delPostById',postsController.delPostById)
       .post('/addPost',postsController.addPost)
+      .get('/getPostById',postsController.getPostById)
 
 
 

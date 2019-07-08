@@ -88,3 +88,15 @@ exports.addPost = (obj,callback) => {
         }
     })
 }
+
+// 根据文章id获取文章数据
+exports.getPostById = (id,callback) => {
+    var sql = 'select * from posts where id = ' + id
+    connection.query(sql,(err,results) => {
+        if(err){
+            callback(err)
+        }else{
+            callback(null,results[0])
+        }
+    })
+}

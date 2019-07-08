@@ -87,7 +87,28 @@ $(function () {
     if(id){
         // 要根据id号获取当前id所对应的文章数据
         $.ajax({
-            
+            url:'/getPostById',
+            type:'get',
+            data:{id},
+            dataType:'json',
+            success:function(res){
+                console.log(res)
+                if(res.code == 200){
+                    // 进行表单数据的默认填充
+                    $('#title').val(res.data.title)
+                    $('#content').val(res.data.content)
+                    $('#slug').val(res.data.slug)
+                    $('.thumbnail').attr('src','/uploads/'+res.data.feature).show()
+                    // 对于图片，不公要显示图片，而且还有存储隐藏域：因为我们不能强迫用户去修改每一个值，对于图片，如果用户没有修改图片，应该保留原始图片，而我们后期获取数据会从隐藏域中获取，所以我们还将图片名称存储到隐藏域中
+                    $('[name=feature]').val(res.data.feature)
+                    $('#category').val(res.data.category_id)
+                    // 细节1：当前日期表单元素需要的格式为：YYYY-MM-DDTHH:mm:ss，我希望后台能够给我这种格式的日期数据
+                    $('#created').val(res.data.created)
+                    $('#status').val(res.data.status)
+                    // 细节2：编辑一定需要条件，那么我们将id存储到隐藏域
+                    $('[name="id"]').val(id)
+                }
+            }
         })
     }
 })

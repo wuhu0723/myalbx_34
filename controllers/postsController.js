@@ -68,3 +68,25 @@ exports.addPost = (req,res) => {
         }
     })
 }
+
+// 根据id获取文章数据
+exports.getPostById = (req,res) =>{
+    var id = req.query.id
+    // 调用数据模块进行文章数据的获取
+    postsModule.getPostById(id,(err,data) => {
+        if(err){
+            res.json({
+                code:400,
+                msg:'数据查询失败'
+            })
+        }else{
+            // 这里进行日期格式的设置是因为前面表单元素需要这种格式:YYYY-MM-DDTHH:mm:ss
+            data.created = moment(data.created).format('YYYY-MM-DDTHH:mm:ss')
+            res.json({
+                code:200,
+                msg:'数据查询成功',
+                data:data
+            })
+        }
+    })
+}
