@@ -23,7 +23,6 @@ $(function () {
         CKEDITOR.instances.content.updateElement()
 
         // serialize:获取当前表单中所有拥有name属性的value值
-        console.log($('.row').serialize())
         // 1.直接富文本框中的数据
         // instances:可以获取到当前CKEDITOR的所的实例，通过replace方法就可以创建实例
         // getData是可以获取到数据，但是对于我们而言，需要额外的进行参数的拼接 --不方便
@@ -34,7 +33,14 @@ $(function () {
             data:$('.row').serialize(),
             dataType:'json',
             success:function(res){
-                console.log(res)
+                if(res.code == 200){
+                    $('.alert-danger > strong').text('新增成功')
+                    $('.alert-danger > span').text(res.msg)
+                    $('.alert-danger').show()
+                    setTimeout(() => {
+                        location.href = '/admin/posts'
+                    }, 3000);
+                }
             }
         })
     })
@@ -72,4 +78,16 @@ $(function () {
             }
         })
     })
+
+    // 获取当前可能存在的pid值
+    // 访问一个不存在的对象---对象没有定义
+    // 访问一个对象不存在 的属性，仅仅是返回unddfined
+    var id = itcast.getParameter(location.search).id
+    // 判断是否有id,如果有就是编辑，如果没有就是新增
+    if(id){
+        // 要根据id号获取当前id所对应的文章数据
+        $.ajax({
+            
+        })
+    }
 })

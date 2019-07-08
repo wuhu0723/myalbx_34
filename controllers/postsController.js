@@ -4,7 +4,6 @@ var moment = require('moment')
 exports.getPostList = (req,res) => {
     // 获取参数:这种获取参数的方式是因为已经添加了body-parser的配置
     var obj = req.query
-    console.log(obj)
     // 获取所有文章列表并返回
     // 数据获取调用数据模块进行处理
     postsModule.getPostList(obj,(err,data) => {
@@ -54,8 +53,18 @@ exports.addPost = (req,res) => {
     obj.views = 0
     obj.likes = 0
     obj.user_id = req.session.currentUser.id
-    console.log('00000000000000000000000')
-    console.log(req.session.currentUser)
-    console.log('00000000000000000000000')
     // 调用数据模块 的新增文章的方法进行文章的新增
+    postsModule.addPost(obj,(err) => {
+        if(err){
+            res.json({
+                code:400,
+                msg:'文章新增失败'
+            })
+        }else{
+            res.json({
+                code:200,
+                msg:'文章新增成功'
+            })
+        }
+    })
 }

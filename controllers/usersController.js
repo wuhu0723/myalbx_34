@@ -11,9 +11,6 @@ exports.login = (req,res) => {
             })
         }else{
             if(data){ // 有没有能够查询到结果
-                console.log('------------------')
-                console.log(data)
-                console.log('------------------')
                 if(data.password == obj.password){
                     // 将登陆成功的状态写入到cookie
                     // res.writeHead(200,{

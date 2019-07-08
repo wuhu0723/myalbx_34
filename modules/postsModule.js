@@ -76,3 +76,15 @@ exports.delPostById = (id,callback) => {
         }
     })
 }
+
+// 新增文章
+exports.addPost = (obj,callback) => {
+    var sql = 'insert into posts set ?'
+    connection.query(sql,[obj],(err,results) => {
+        if(err){
+            callback(err)
+        }else{
+            callback(null)
+        }
+    })
+}
