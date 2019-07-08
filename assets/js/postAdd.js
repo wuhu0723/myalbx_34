@@ -16,35 +16,7 @@ $(function () {
     // 初始化富文本框：创建一个富文本框覆盖指定id号的textarea
     CKEDITOR.replace( 'content' )
     
-    // 保存文章数据--实现文章的新增
-    $('.btnSave').on('click',function(e){
-        e.preventDefault()
-        // 同步数据：将富文本框中的数据与textarea中的数据进行同步--两者同步之后数据会一样
-        CKEDITOR.instances.content.updateElement()
-
-        // serialize:获取当前表单中所有拥有name属性的value值
-        // 1.直接富文本框中的数据
-        // instances:可以获取到当前CKEDITOR的所的实例，通过replace方法就可以创建实例
-        // getData是可以获取到数据，但是对于我们而言，需要额外的进行参数的拼接 --不方便
-        // console.log(CKEDITOR.instances.content.getData())
-        $.ajax({
-            type:'post',
-            url:'/addPost',
-            data:$('.row').serialize(),
-            dataType:'json',
-            success:function(res){
-                if(res.code == 200){
-                    $('.alert-danger > strong').text('新增成功')
-                    $('.alert-danger > span').text(res.msg)
-                    $('.alert-danger').show()
-                    setTimeout(() => {
-                        location.href = '/admin/posts'
-                    }, 3000);
-                }
-            }
-        })
-    })
-
+  
 
     // 实现文件的上传
     $('#feature').on('change',function(){
@@ -83,6 +55,9 @@ $(function () {
     // 访问一个不存在的对象---对象没有定义
     // 访问一个对象不存在 的属性，仅仅是返回unddfined
     var id = itcast.getParameter(location.search).id
+    
+    // 修改提示文本
+    id ? $('.page-title > h1').text('编辑文章') : $('.page-title > h1').text('写文章')
     // 判断是否有id,如果有就是编辑，如果没有就是新增
     if(id){
         // 要根据id号获取当前id所对应的文章数据
@@ -107,6 +82,47 @@ $(function () {
                     $('#status').val(res.data.status)
                     // 细节2：编辑一定需要条件，那么我们将id存储到隐藏域
                     $('[name="id"]').val(id)
+                }
+            }
+        })
+    }
+
+    // 保存文章数据--实现文章的新增
+    $('.btnSave').on('click',function(e){
+        e.preventDefault()
+        // 同步数据：将富文本框中的数据与textarea中的数据进行同步--两者同步之后数据会一样
+        CKEDITOR.instances.content.updateElement()
+
+        // 如果有id就是编辑，否则就是保存
+        if(id){
+            opt('/editPost')
+        }else{
+            opt('/addPost')
+        }
+    })
+
+    // 封装一个函数，实现新增或编辑
+    function opt(url){
+        // serialize:获取当前表单中所有拥有name属性的value值
+        // 1.直接富文本框中的数据
+        // instances:可以获取到当前CKEDITOR的所的实例，通过replace方法就可以创建实例
+        // getData是可以获取到数据，但是对于我们而言，需要额外的进行参数的拼接 --不方便
+        // console.log(CKEDITOR.instances.content.getData())
+        $.ajax({
+            type:'post',
+            url:url,
+            data:$('.row').serialize(),
+            dataType:'json',
+            success:function(res){
+                console.log(res)
+                if(res.code == 200){
+                    alert(1)
+                    $('.alert-danger > strong').text('新增成功')
+                    $('.alert-danger > span').text(res.msg)
+                    $('.alert-danger').show()
+                    setTimeout(() => {
+                        location.href = '/admin/posts'
+                    }, 3000);
                 }
             }
         })

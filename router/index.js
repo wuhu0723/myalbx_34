@@ -43,6 +43,8 @@ router.get('/',pagesController.getIndexPage)
       .get('/delPostById',postsController.delPostById)
       .post('/addPost',postsController.addPost)
       .get('/getPostById',postsController.getPostById)
+      // 文章编辑
+      .post('/editPost',postsController.editPost)
 
 
 

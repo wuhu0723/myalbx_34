@@ -50,12 +50,14 @@ exports.delPostById = (req,res) => {
 exports.addPost = (req,res) => {
     // 接收参数
     var obj = req.body
+    obj.id = null
     obj.views = 0
     obj.likes = 0
     obj.user_id = req.session.currentUser.id
     // 调用数据模块 的新增文章的方法进行文章的新增
     postsModule.addPost(obj,(err) => {
         if(err){
+            console.log(err)
             res.json({
                 code:400,
                 msg:'文章新增失败'
@@ -86,6 +88,27 @@ exports.getPostById = (req,res) =>{
                 code:200,
                 msg:'数据查询成功',
                 data:data
+            })
+        }
+    })
+}
+
+// 实现文章的编辑
+exports.editPost = (req,res) => {
+    // 接收参数
+    var obj = req.body
+    // 调用数据模块 的新增文章的方法进行文章的新增
+    postsModule.editPost(obj,(err) => {
+        if(err){
+            console.log(err)
+            res.json({
+                code:400,
+                msg:'文章编辑失败'
+            })
+        }else{
+            res.json({
+                code:200,
+                msg:'文章编辑成功'
             })
         }
     })
