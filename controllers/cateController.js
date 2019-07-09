@@ -20,3 +20,40 @@ exports.getAllCateList = (req,res)=>{
     })
 }
 
+// 编辑分类数据提交
+exports.editCategory = (req,res) => {
+    var obj = req.body
+    cateModule.editCategory(obj,(err) => {
+        if(err){
+            res.json({
+                code:400,
+                msg:'数据编辑失败'
+            })
+        }else{
+            res.json({
+                code:200,
+                msg:'数据编辑成功'
+            })
+        }
+    })
+}
+
+
+// 编辑分类数据删除
+exports.delCategory = (req,res) => {
+    var id = req.query.id
+    cateModule.delCategory(id,(err) => {
+        if(err){
+            res.json({
+                code:400,
+                msg:'数据删除失败'
+            })
+        }else{
+            res.json({
+                code:200,
+                msg:'数据删除成功'
+            })
+        }
+    })
+}
+

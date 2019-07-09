@@ -23,3 +23,27 @@ exports.getAllCateList = (callback) => {
         }
     })
 }
+
+// 实现分类数据的编辑
+exports.editCategory = (obj,callback) => {
+    var sql = 'update categories set ? where id = ?'
+    connection.query(sql,[obj,obj.id],(err,results) => {
+        if(err){
+            callback(err)
+        }else{
+            callback(null)
+        }
+    })
+}
+
+// 实现分类数据的删除
+exports.delCategory = (id,callback) => {
+    var sql = 'delete from categories where id = ' + id
+    connection.query(sql,(err,results) => {
+        if(err){
+            callback(err)
+        }else{
+            callback(null)
+        }
+    })
+}
