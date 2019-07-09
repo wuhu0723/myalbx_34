@@ -37,6 +37,12 @@ $(function(){
             success:function(res){
                 if(res.code == 200){
                     alert('ok')
+                    $('.info').text('新增分类目录')
+                    $('#name').val('')
+                    $('#slug').val('')
+                    $('#id').val('')
+                    $('.addsubmit').show()
+                    $('.editsubmit').hide()
                     init()
                 }
             }
@@ -114,6 +120,26 @@ $(function(){
             success:function(res){
                 if(res.code == 200){
                     alert('ok')
+                    init()
+                }
+            }
+        })
+    })
+
+    // 新增分类数据
+    $('.addsubmit').on('click',function(){
+        // 收集数据
+        // 发起请求
+        $.ajax({
+            type:'post',
+            url:'/addCategory',
+            data:$('form').serialize(),
+            dataType:'json',
+            success:function(res){
+                if(res.code == 200){
+                    alert('ok')
+                    $('#name').val('')
+                    $('#slug').val('')
                     init()
                 }
             }

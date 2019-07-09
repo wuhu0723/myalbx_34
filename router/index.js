@@ -51,6 +51,7 @@ router.get('/',pagesController.getIndexPage)
       // 2.获取所有分getAllCateList类数据
       .get('/getAllCateList',cateController.getAllCateList)
       .post('/editCategory',cateController.editCategory)
+      .post('/addCategory',cateController.addCategory)
       .get('/delCategory',cateController.delCategory)
 
 

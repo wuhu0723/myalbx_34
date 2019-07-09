@@ -36,6 +36,18 @@ exports.editCategory = (obj,callback) => {
     })
 }
 
+// 实现分类数据的新增
+exports.addCategory = (obj,callback) => {
+    var sql = 'insert into categories values(null,?,?)'
+    connection.query(sql,[obj.slug,obj.name],(err,results) => {
+        if(err){
+            callback(err)
+        }else{
+            callback(null)
+        }
+    })
+}
+
 // 实现分类数据的删除
 exports.delCategory = (id,callback) => {
     var sql = `delete from categories where id in (${id}) `

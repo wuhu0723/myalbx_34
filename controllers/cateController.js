@@ -38,6 +38,24 @@ exports.editCategory = (req,res) => {
     })
 }
 
+// 添加分类数据提交
+exports.addCategory = (req,res) => {
+    var obj = req.body
+    cateModule.addCategory(obj,(err) => {
+        if(err){
+            res.json({
+                code:400,
+                msg:'数据新增失败'
+            })
+        }else{
+            res.json({
+                code:200,
+                msg:'数据新增成功'
+            })
+        }
+    })
+}
+
 
 // 编辑分类数据删除
 exports.delCategory = (req,res) => {
