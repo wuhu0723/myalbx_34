@@ -42,22 +42,20 @@ exports.getOptions = (callback) => {
  
 
 exports.updateOptions = (obj,callback) => {
-    console.log(obj)
     var cnt = 0
     // 构建Sql语句
     // {'site_name':'站点名称','site_description':'站点描述'}
     // update `options` set value = '阿里百秀 - 发现生活，发现美！1' where 	`key` = 'site_name'
     for(let key in obj){
-        var sql =  'update options set value = ? where `key` = ?'
-        connection.query(sql,[obj[key],key],(err) => {
-            console.log(sql)
+        var sql =  `update options set value = '${obj[key]}' where `+ '`key`'+` = '${key}'`
+        console.log(sql)
+        connection.query(sql,(err) => {
             if(err){
-                callback(err)
-                return
+                console.log(err)
             }else{
                 cnt ++
             }
-            if(cnt == 7){
+            if(cnt == 6){
                 console.log(cnt)
                 callback(null)
             }
