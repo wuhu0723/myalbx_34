@@ -4,6 +4,7 @@ const postsController = require('../controllers/postsController.js')
 const cateController = require('../controllers/cateController.js')
 const uploadController = require('../controllers/uploadController')
 const usersController = require('../controllers/usersController')
+const optionsController = require('../controllers/optionsController')
 // 封装路由模块
 const express = require('express')
 // Router()构造函数创建的路由对象可以当成一个中间件来使用
@@ -61,6 +62,10 @@ router.get('/',pagesController.getIndexPage)
 
       // 用户登陆验证
       .post('/login',usersController.login)
+
+      // options操作的所有路由
+      // 菜单项的添加
+      .post('/addMenu',optionsController.addMenu)
 
 
 
