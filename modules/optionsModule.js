@@ -27,3 +27,40 @@ exports.addMenu = (obj,callback) => {
         }
     })
 }
+
+
+exports.getOptions = (callback) => {
+    var sql = 'select value from `options` where id < 9'
+    connection.query(sql,(err,results) => {
+        if(err){
+            callback(err)
+        }else{
+            callback(null,results)
+        }
+    })
+}
+ 
+
+exports.updateOptions = (obj,callback) => {
+    console.log(obj)
+    var cnt = 0
+    // 构建Sql语句
+    // {'site_name':'站点名称','site_description':'站点描述'}
+    // update `options` set value = '阿里百秀 - 发现生活，发现美！1' where 	`key` = 'site_name'
+    for(let key in obj){
+        var sql =  'update options set value = ? where `key` = ?'
+        connection.query(sql,[obj[key],key],(err) => {
+            console.log(sql)
+            if(err){
+                callback(err)
+                return
+            }else{
+                cnt ++
+            }
+            if(cnt == 7){
+                console.log(cnt)
+                callback(null)
+            }
+        })
+    }
+}

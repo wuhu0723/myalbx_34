@@ -66,6 +66,8 @@ router.get('/',pagesController.getIndexPage)
       // options操作的所有路由
       // 菜单项的添加
       .post('/addMenu',optionsController.addMenu)
+      .get('/getOptions',optionsController.getOptions)
+      .post('/updateOptions',optionsController.updateOptions)
 
 
 

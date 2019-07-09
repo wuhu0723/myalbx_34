@@ -17,3 +17,37 @@ exports.addMenu = (req, res) => {
         }
     })
 }
+
+exports.getOptions = (req,res) => {
+    optionsModule.getOptions((err,data) => {
+        if(err){
+            res.json({
+                code:400,
+                msg:'数据查询失败'
+            })
+        }else{
+            res.json({
+                code:200,
+                msg:'数据查询成功',
+                data:data
+            })
+        }
+    })
+}
+
+exports.updateOptions = (req,res) => {
+    var obj = req.body
+    optionsModule.updateOptions(obj,(err) => {
+        if (err) {
+            res.json({
+                code: 400,
+                msg: '数据更新失败'
+            })
+        } else {
+            res.json({
+                code: 200,
+                msg: '数据更新成功'
+            })
+        }
+    })
+}
