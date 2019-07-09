@@ -33,12 +33,12 @@
       <div class="col-md-8">
         <div class="page-action">
           <!-- show when multiple checked -->
-          <a class="btn btn-danger btn-sm" href="javascript:;" style="display: none">批量删除</a>
+          <a class="btn btn-danger btn-sm btndels" href="javascript:;" style="display: none">批量删除</a>
         </div>
         <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th class="text-center" width="40"><input type="checkbox"></th>
+              <th class="text-center" width="40"><input type="checkbox" class="chkAll"></th>
               <th>名称</th>
               <th>Slug</th>
               <th class="text-center" width="100">操作</th>
@@ -59,7 +59,7 @@
 <script type="text/template" id='cateTemp'>
     {{each data as value index}}
       <tr>
-        <td class="text-center"><input type="checkbox"></td>
+        <td class="text-center"><input type="checkbox" class='chkSinger' data-id='{{value.id}}'></td>
         <td>{{value.name}}</td>
         <td>{{value.slug}}</td>
         <td class="text-center">
